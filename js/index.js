@@ -37,6 +37,7 @@ function getUserData(){
 		,success: function(data){
 			if($('.userData').length == 0){
 				$('body').append('<div id="userData" class="userData"></div>');
+				$('body').append('<div id="userMap" class="userMap"></div>');
 			}
 			var sdata = "<h1>User Data</h1>"
 			sdata+= "<h2>PLZ</h2>" + "<p class='editable' id='plz'>" + data.plz + "</p>";
@@ -47,6 +48,7 @@ function getUserData(){
 				sdata+= "<h3>" + v.name + "</h3><p class='editable' id='" + v.name + "'>" + v.text + "</p>";
 			});
 			$("#userData").html(sdata);
+			$("#userMap").html('<iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.de/?ie=UTF8&q=' + data.loc.lat + "+" + data.loc.lng +'&output=embed"></iframe>');
 			makeEditable();
 		}
 	});

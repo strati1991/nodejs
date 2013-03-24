@@ -14,7 +14,7 @@ function respond(req,res,sess,db){
   if(parse.query._jsonp != undefined){
     _jsonp = parse.query._jsonp.toString();
     if(sess.login){
-      users.findOne({"username" : sess.userId}
+      users.findOne({"username" : sess.userId},{_id: 0,password:0}
         ,function(err,data){
           if(data != null){
             res.end(_jsonp+ "(" + JSON.stringify(data) + ")");
