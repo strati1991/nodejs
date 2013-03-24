@@ -24,8 +24,8 @@ function respond(req,res,sess,db){
             var key = parse.query.key;
             var value = parse.query.value;
             var json = { };
-            json[key] = parseInt(value);
-            res.end(_jsonp+ "(" + users.update({"username": sess.userId},json,{ multi: false }) + ")");
+            json[key] = value;
+            users.collection.update({"username": sess.userId},{$set: json},{ multi: false },function(err){res.end(_jsonp+ "(" + err + ")")});
           } else {
             res.end(_jsonp + "(" + JSON.stringify({ error: "UserIdIsWrong" }) + ")");
           }

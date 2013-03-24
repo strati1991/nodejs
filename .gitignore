@@ -4,3 +4,23 @@
 *.scssc
 
 *.sassc
+
+*._0
+
+nodejs/data/db/journal/lsn
+
+*.0
+
+*.ns
+
+*.ns
+
+*.ns
+
+*.0
+
+nodejs/data/db/test.0
+
+nodejs/data/db/mongod.lock
+
+nodejs/data/db/test.ns
