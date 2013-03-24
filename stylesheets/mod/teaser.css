@@ -1,0 +1,8 @@
+.teaser {
+  padding: 10px; }
+  .teaser h3 {
+    color: red;
+    font-size: 18px; }
+  .teaser p {
+    font-size: 14px;
+    color: gray; }

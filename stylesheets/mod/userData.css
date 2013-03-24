@@ -1,0 +1,22 @@
+div.userData {
+  border: 1px solid gray;
+  padding: 5px;
+  width: 160px;
+  float: left; }
+  div.userData h1 {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 18px;
+    line-height: 22px; }
+  div.userData h2 {
+    font-size: 16px;
+    line-height: 18px; }
+  div.userData h3 {
+    font-size: 14px;
+    line-height: 18px;
+    width: 160px;
+    font-weight: bold; }
+  div.userData p {
+    font-size: 14px;
+    line-height: 18px;
+    width: 160px; }
