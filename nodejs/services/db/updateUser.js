@@ -33,7 +33,7 @@ function respond(req,res,sess,db){
                 users.collection.update({"username": sess.userId},{$set: json},{ multi: false },function(err){res.end(_jsonp+ "(" + err + ")")});
               });
             } else {
-            users.collection.update({"username": sess.userId},{$set: json},{ multi: false },function(err){res.end(_jsonp+ "(" + err + ")")});
+              users.collection.update({"username": sess.userId},{$set: json},{ multi: false },function(err){res.end(_jsonp+ "(" + err + ")")});
             }
           } else {
             res.end(_jsonp + "(" + JSON.stringify({ error: "UserIdIsWrong" }) + ")");

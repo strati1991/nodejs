@@ -59,3 +59,53 @@ div.userMap iframe {
   border: 1px solid gray;
   padding: 5px;
   float: left; }
+
+div.search {
+  border: 1px solid gray;
+  padding: 5px;
+  width: 160px;
+  height: 220px;
+  float: left; }
+  div.search h1 {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 18px;
+    line-height: 22px; }
+  div.search h2 {
+    font-size: 16px;
+    line-height: 18px; }
+  div.search input {
+    line-height: 20px;
+    width: 160px; }
+  div.search input.button {
+    line-height: 30px;
+    font-size: 28px;
+    margin-top: 15px;
+    width: 90px;
+    height: 40px;
+    float: right; }
+
+div.producerData {
+  border: 1px solid gray;
+  padding: 5px;
+  width: 160px;
+  float: left; }
+  div.producerData h1 {
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 18px;
+    line-height: 22px; }
+  div.producerData h2 {
+    font-size: 16px;
+    line-height: 18px; }
+  div.producerData h3 {
+    font-size: 14px;
+    line-height: 18px;
+    width: 160px;
+    font-weight: bold; }
+  div.producerData p {
+    font-size: 14px;
+    line-height: 18px;
+    width: 160px; }
+  div.producerData .producer {
+    border-bottom: 2px solid gray; }

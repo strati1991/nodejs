@@ -1,4 +1,14 @@
 $(document).ready(function() {
+	$(function() {
+    	$( "#slider" ).slider({
+	      orientation: "horizontal",
+	      range: "min",
+	      max: 200,
+	      value: 10,
+	      change: sliderChange,
+	      slide: sliderValue
+    	});
+  	});
     $('#anmelden').bind('click', function() {
 			$.ajax({
 			 	type: "POST"
@@ -24,8 +34,51 @@ $(document).ready(function() {
 				}
 			});
 	});
+	$('#plz').keypress(function(event) {
+		if ( event.which == 13 ) {
+     		getProducerByFilter({plz: $('#plz').val(),distance: $( "#slider" ).slider( "value" ) / 10});
+   		}
+	});
 });
 
+function sliderChange(){
+	getProducerByFilter({distance: $( "#slider" ).slider( "value" )/10})
+}
+function sliderValue(){
+	$("#sliderValue").html($( "#slider" ).slider( "value" )/10);
+}
+
+function getProducerByFilter(data){
+	$.ajax({
+		 	type: "POST"
+			,url: "http://localhost:3000/db/getProducerByFilter"
+			,dataType: 'jsonp'
+			,contentType : 'application/x-www-form-urlencoded'
+			,data: data
+			,jsonp: '_jsonp'
+			,jsonpCallback: 'jsonpCallback'
+			,success: function(data){
+				$(".producerData").remove();
+				if(data.length >0){
+					$('body').append('<div id="producerData" class="producerData"></div>');
+					var sdata = "";
+					$.each(data, function(s, item) {
+	    				sdata+= "<div class=producer><h1>" + item.username + "</h1>"
+						sdata+= "<h2>PLZ</h2>" + "<p class='editable' id='plz'>" + item.plz + "</p>";
+						sdata+= "<h2>Strasse</h2>" + "<p class='editable' id='street'>" + item.street + "</p>";
+						sdata+= "<h2>Hausnummer</h2>" + "<p class='editable' id='hnr'>" + item.hnr + "</p>";
+						sdata+= "<h2>Produkte:</h2>";
+						$.each(item.products,function(i, product){
+							sdata+= "<h3>" + product.name + "</h3><p id='" + product.name + "'>" + product.text + "</p>";
+						});
+						sdata+= "</div>";
+					});
+					$("#producerData").html(sdata);
+				}
+				
+			}
+	});
+}
 function getUserData(){
 	$.ajax({
 		 	type: "POST"
