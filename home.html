@@ -1,0 +1,31 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="./stylesheets/basic.css">
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+	<script type="text/javascript" src="./js/lib/jquery.js"></script>
+	<script type="text/javascript" src="./js/lib/md5.js"></script>
+	<script type="text/javascript" src="./js/funktion.js"></script>
+	<script type="text/javascript" src="./js/lib/jquery-ui.js"></script>
+</head>
+<body>
+	<div id="plz_box" class="center">
+		<div class="center-text">
+			<h2>Deine Postleitzahl</h2>
+			<input class="plz" 
+				type="text" 
+				onblur="$('#plz').attr('value','deine PLZ...');" 
+				onfocus="$('#plz').attr('value','');" value="deine PLZ..." id="plz">
+			<br>
+			<input class="button" type="button" value="Produkte in deiner N&auml;he" id="produkte">
+			<input class="button" type="button" value="Produzenten in deiner N&auml;he" id="produzenten">
+		</div>
+	</div>
+	<div id="produzenten_box" class="center hidden">
+		<h2>Abstand: <span id="sliderValue">1</span>km</h2>
+		<div id="slider"></div>
+		<div id="producer_list" class="producer_list">
+		</div>
+	</div>
+</body>
+</html>

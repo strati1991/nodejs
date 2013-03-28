@@ -34,13 +34,28 @@ $(document).ready(function() {
 				}
 			});
 	});
-	$('#plz').keypress(function(event) {
-		if ( event.which == 13 ) {
-     		getProducerByFilter({plz: $('#plz').val(),distance: $( "#slider" ).slider( "value" ) / 10});
-   		}
+
+	$('#produkte').bind('click',function(){
+		hide("#plz_box",function(){
+			getProducerByFilter({plz: $('#plz').val(),distance: $( "#slider" ).slider( "value" ) / 10});
+			show("#produzenten_box",function(){
+
+			});
+		});
 	});
 });
-
+function hide(selector,ready){
+	$(selector).animate({ opacity: "0"}, 500, function(){
+		$(selector).addClass('hidden');
+		ready();
+	});
+}
+function show(selector,ready){
+	$(selector).removeClass('hidden');
+	$(selector).animate({ opacity: "1"}, 500, function(){
+		ready();
+	});
+}
 function sliderChange(){
 	getProducerByFilter({distance: $( "#slider" ).slider( "value" )/10})
 }
@@ -58,22 +73,21 @@ function getProducerByFilter(data){
 			,jsonp: '_jsonp'
 			,jsonpCallback: 'jsonpCallback'
 			,success: function(data){
-				$(".producerData").remove();
+				$("#producer_list").html('');
 				if(data.length >0){
-					$('body').append('<div id="producerData" class="producerData"></div>');
 					var sdata = "";
 					$.each(data, function(s, item) {
-	    				sdata+= "<div class=producer><h1>" + item.username + "</h1>"
-						sdata+= "<h2>PLZ</h2>" + "<p class='editable' id='plz'>" + item.plz + "</p>";
-						sdata+= "<h2>Strasse</h2>" + "<p class='editable' id='street'>" + item.street + "</p>";
-						sdata+= "<h2>Hausnummer</h2>" + "<p class='editable' id='hnr'>" + item.hnr + "</p>";
-						sdata+= "<h2>Produkte:</h2>";
+						sdata+= "<div class=producer>";
+	    				sdata+= "<h1>" + item.username + "</h1>";
+						sdata+= "<h2>Adresse</h2>" + "<p>" +item.street + "&nbsp;" + item.hnr+ "<br>" + item.plz +"&nbsp;" +item.town + "</p>";
+						sdata+= "<div class=products>";
 						$.each(item.products,function(i, product){
-							sdata+= "<h3>" + product.name + "</h3><p id='" + product.name + "'>" + product.text + "</p>";
+							sdata+= "<h3>" + product.name + "</h3>";
 						});
 						sdata+= "</div>";
+						sdata+= "</div>";
 					});
-					$("#producerData").html(sdata);
+					$("#producer_list").html(sdata);
 				}
 				
 			}

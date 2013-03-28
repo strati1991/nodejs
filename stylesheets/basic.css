@@ -109,3 +109,42 @@ div.producerData {
     width: 160px; }
   div.producerData .producer {
     border-bottom: 2px solid gray; }
+
+body {
+  margin: 50px 0px;
+  padding: 0px;
+  text-align: center; }
+
+div.center {
+  width: 500px;
+  margin: 0px auto;
+  text-align: left;
+  padding: 15px;
+  border: 1px dashed #333333;
+  background-color: #eee;
+  border-radius: 3px; }
+  div.center .center-text {
+    text-align: center; }
+  div.center .plz {
+    width: 200px;
+    height: 29px;
+    border-radius: 3px;
+    border: 1px solid #cccccc;
+    padding: 8px;
+    font-weight: 200;
+    font-size: 15px;
+    font-family: Verdana;
+    box-shadow: 1px 1px 5px #cccccc;
+    color: gray; }
+  div.center .button {
+    margin: 20px;
+    font: 200% "Quando", serif; }
+
+.hidden {
+  display: none; }
+
+.producer_list ul {
+  list-style: none; }
+.producer_list li {
+  display: block;
+  float: left; }

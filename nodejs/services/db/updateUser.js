@@ -29,7 +29,8 @@ function respond(req,res,sess,db){
               var getCoords = require("../maps/getCoord");
               getCoords.get(data['street']+ "+" + data['plz'] + "+" + data['hnr'],
               function(data){
-                json["loc"] = data;
+                json["loc"] = data.loc;
+                json["town"] = data.town;
                 users.collection.update({"username": sess.userId},{$set: json},{ multi: false },function(err){res.end(_jsonp+ "(" + err + ")")});
               });
             } else {

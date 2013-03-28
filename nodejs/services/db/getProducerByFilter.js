@@ -18,8 +18,7 @@ function respond(req,res,sess,db){
       var getCoords = require("../maps/getCoord");
       getCoords.get(plz,
         function(data){
-          sess.query_loc = data;
-          console.log(data);
+          sess.query_loc = data.loc;
           var distance = parse.query.distance / 111;
           users.find({loc: {$near: [sess.query_loc.lat,sess.query_loc.lng], $maxDistance:distance} },
             function(err,data){
