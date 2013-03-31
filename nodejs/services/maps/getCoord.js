@@ -1,10 +1,9 @@
 var http = require("http");
-
 function get(address,callback){
 	var options = {
-		host: 'maps.google.de',
+		host: 'nominatim.openstreetmap.org',
 		port: 80,
-		path: '/maps/api/geocode/json?address=' + address + '&sensor=false'
+		path: '/search?q=' + address + '&format=json&addressdetails=1'
 	};
 	cb = function(response) {
 	var str = '';
@@ -17,11 +16,7 @@ function get(address,callback){
 	  //the whole response has been recieved, so we just print it out here
 	response.on('end', function () {
 	    data = JSON.parse(str);
-	    data.results[0].address_components.forEach(function(val, index){
-				if(val.types[0] == "locality"){
-		    		callback({loc:{lat: data.results[0].geometry.location.lat,lng:data.results[0].geometry.location.lng},town:val.long_name});
-		    	}
-	    	});
+		callback({loc:{lat: parseFloat(data[0].lat),lng: parseFloat(data[0].lon)},town:data[0].address.county});
 	  	});
 	}
 

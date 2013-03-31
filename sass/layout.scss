@@ -1,7 +1,7 @@
 body {
-	margin:50px 0px; padding:0px;
-	text-align:center;
-	}
+	margin:50px 0px; 
+	padding:0px;
+}
 div.center{
 	width:500px;
 	margin:0px auto;
@@ -10,9 +10,6 @@ div.center{
 	border: 1px dashed #333;
 	background-color:#eee;
 	border-radius: 3px;
-	.center-text{
-  		text-align:center;
-  	}
   	.plz{
   		width: 200px;
 		height: 29px;
@@ -34,11 +31,35 @@ div.center{
 	display:none;
 }
 .producer_list{
-	ul{
-		list-style: none;
+	.producer{
+		position: relative;
+		height: 100px;
+		border-bottom: 1px dotted #CCC;
 	}
-	li{
-		display: block;
-		float:left;
+	name{
+		position: absolute;
+		font-family: 'Gabriela', serif;
+		font-size: 22px;
+		line-height: 40px;
+	}
+	address{
+		position: absolute;
+		margin-top: 40px;
+		font-family: 'Gabriela', serif;
+		font-size: 16px;
+		line-height: 18px;
+		font-style: italic;
+	}
+	products{
+		position: absolute;
+		margin-top: 40px;
+		margin-left: 200px;
+	}
+	product{
+		margin: 2px;
+		img{
+			width: 20px;
+			height: 20px;
+		}
 	}
 }

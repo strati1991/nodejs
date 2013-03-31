@@ -12,7 +12,7 @@ function respond(req,res,sess,db){
     users = db.model('updateUser',schema,'user');
   }
   var parse = url.parse(req.url,true);
-
+  console.log(JSON.stringify(req.files));
   res.writeHead(200, { 'Content-Type': 'application/json' });
   var _jsonp = null;
   if(parse.query._jsonp != undefined){
@@ -24,8 +24,8 @@ function respond(req,res,sess,db){
             var key = parse.query.key;
             var value = parse.query.value;
             var json = { };
-            json[key] = value;
-            if(key == "plz" || key == "street"){
+            json[key] = value; 
+            if(key == "plz" || key == "street" || key == "hnr"){
               var getCoords = require("../maps/getCoord");
               getCoords.get(data['street']+ "+" + data['plz'] + "+" + data['hnr'],
               function(data){

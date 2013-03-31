@@ -29,7 +29,7 @@ function respond(req,res,sess,db){
     } else { 
       var distance = parse.query.distance /111;
       users.find({loc: {$near: [sess.query_loc.lat,sess.query_loc.lng], $maxDistance:distance} },function(err,data){
-         res.end(_jsonp + "(" + JSON.stringify(data) + ")");
+        res.end(_jsonp + "(" + JSON.stringify(data) + ")");
       });
     }
   } else {

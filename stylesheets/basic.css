@@ -35,7 +35,6 @@ div.login {
 div.userData {
   border: 1px solid gray;
   padding: 5px;
-  width: 160px;
   float: left; }
   div.userData h1 {
     padding: 0 0 0 0;
@@ -54,6 +53,10 @@ div.userData {
     font-size: 14px;
     line-height: 18px;
     width: 160px; }
+  div.userData span {
+    font-family: "Gabriela", serif;
+    font-size: 16px;
+    line-height: 20px; }
 
 div.userMap iframe {
   border: 1px solid gray;
@@ -112,8 +115,7 @@ div.producerData {
 
 body {
   margin: 50px 0px;
-  padding: 0px;
-  text-align: center; }
+  padding: 0px; }
 
 div.center {
   width: 500px;
@@ -123,8 +125,6 @@ div.center {
   border: 1px dashed #333333;
   background-color: #eee;
   border-radius: 3px; }
-  div.center .center-text {
-    text-align: center; }
   div.center .plz {
     width: 200px;
     height: 29px;
@@ -143,8 +143,28 @@ div.center {
 .hidden {
   display: none; }
 
-.producer_list ul {
-  list-style: none; }
-.producer_list li {
-  display: block;
-  float: left; }
+.producer_list .producer {
+  position: relative;
+  height: 100px;
+  border-bottom: 1px dotted #cccccc; }
+.producer_list name {
+  position: absolute;
+  font-family: "Gabriela", serif;
+  font-size: 22px;
+  line-height: 40px; }
+.producer_list address {
+  position: absolute;
+  margin-top: 40px;
+  font-family: "Gabriela", serif;
+  font-size: 16px;
+  line-height: 18px;
+  font-style: italic; }
+.producer_list products {
+  position: absolute;
+  margin-top: 40px;
+  margin-left: 200px; }
+.producer_list product {
+  margin: 2px; }
+  .producer_list product img {
+    width: 20px;
+    height: 20px; }

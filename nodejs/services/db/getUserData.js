@@ -24,7 +24,7 @@ function respond(req,res,sess,db){
         }
       );
       sess.touch();
-    } else {
+    } else {     
       res.end(_jsonp + "(" + JSON.stringify({ error: "NotLoggedIn", }) + ")");
     }
   } else {

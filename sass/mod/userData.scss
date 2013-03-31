@@ -1,7 +1,6 @@
 div.userData{
 	border: 1px solid gray;
 	padding:5px;
-	width:160px;
 	float:left;
 	h1{
 		padding:0 0 0 0;
@@ -23,5 +22,10 @@ div.userData{
 		font-size:14px;
 		line-height:18px;
 		width:160px;
+	}
+	span{
+		font-family: 'Gabriela', serif;
+		font-size: 16px;
+		line-height: 20px;
 	}
 }

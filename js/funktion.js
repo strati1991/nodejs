@@ -23,9 +23,11 @@ $(document).ready(function() {
 			,jsonpCallback: 'jsonpCallback'
 			,success: function(data){
 				if(data.already != undefined){
+					$("#login").remove();
 					getUserData();
 				}else{
 					if(data.login == true){
+						$("#login").remove();
 						getUserData();
 					}else{
 						alert("du bist nicht eingeloggt");
@@ -35,7 +37,7 @@ $(document).ready(function() {
 			});
 	});
 
-	$('#produkte').bind('click',function(){
+	$('#produzenten').bind('click',function(){
 		hide("#plz_box",function(){
 			getProducerByFilter({plz: $('#plz').val(),distance: $( "#slider" ).slider( "value" ) / 10});
 			show("#produzenten_box",function(){
@@ -77,15 +79,16 @@ function getProducerByFilter(data){
 				if(data.length >0){
 					var sdata = "";
 					$.each(data, function(s, item) {
-						sdata+= "<div class=producer>";
-	    				sdata+= "<h1>" + item.username + "</h1>";
-						sdata+= "<h2>Adresse</h2>" + "<p>" +item.street + "&nbsp;" + item.hnr+ "<br>" + item.plz +"&nbsp;" +item.town + "</p>";
-						sdata+= "<div class=products>";
+						sdata+= "<div class='producer'>";
+	    				sdata+= "<name>" + item.username + "</name>";
+						sdata+= "<address>" +item.street + "&nbsp;" + item.hnr+ "<br>" + item.plz +"&nbsp;" +item.town + "</address>";
+						sdata+= "<products>";
+						sdata+= "Produkte:<br>";
 						$.each(item.products,function(i, product){
-							sdata+= "<h3>" + product.name + "</h3>";
+							sdata+= "<product><img title='" + product.name + "'src='img/" + product.name + ".svg'></product>";
 						});
 						sdata+= "</div>";
-						sdata+= "</div>";
+						sdata+= "</producer>";
 					});
 					$("#producer_list").html(sdata);
 				}
@@ -106,10 +109,16 @@ function getUserData(){
 				$('body').append('<div id="userData" class="userData"></div>');
 				$('body').append('<div id="userMap" class="userMap"></div>');
 			}
-			var sdata = "<h1>User Data</h1>"
-			sdata+= "<h2>PLZ</h2>" + "<p class='editable' id='plz'>" + data.plz + "</p>";
-			sdata+= "<h2>Strasse</h2>" + "<p class='editable' id='street'>" + data.street + "</p>";
-			sdata+= "<h2>Hausnummer</h2>" + "<p class='editable' id='hnr'>" + data.hnr + "</p>";
+			var sdata = "<h1>Dein Profil</h1>";
+			if(data.img == ""){
+				sdata+= "<img id='img' class='editable-image' src='img/profile_alt.png' ><form method='post' action='http://localhost:3000/db/updateUser'><input id='file' type='file' style='display:none'></form>";
+			} else {
+				sdata+= "<img id='img' class='editable-image' src='" + data.img +  "' ><form method='post' action='http://localhost:3000/db/updateUser'><input id='file' type='file' style='display:none'></form>";
+			}
+			sdata+= "<h2>Adresse</h2>" + "<span class='editable' id='street'>" + data.street + "</span>&nbsp;";
+			sdata+= "<span class='editable' id='hnr'>"  + data.hnr + "</span><br>";
+			sdata+= "<span class='editable' id='plz'>" + data.plz + "</span>&nbsp;";
+			sdata+= "<span class='editable' id='town'>" + data.town + "</span>";
 			sdata+= "<h2>Produkte:</h2>";
 			$.each(data.products,function(k,v){
 				sdata+= "<h3>" + v.name + "</h3><p class='editable' id='" + v.name + "'>" + v.text + "</p>";
@@ -121,6 +130,12 @@ function getUserData(){
 	});
 }
 function makeEditable(){
+	$('.editable').mouseover(function() {
+		$(this).append("<img src='img/edit.png'>");
+	});
+	$('.editable').mouseleave(function() {
+		$(this).find("img").remove();
+	});
 	$('.editable').bind('click', function() {
 			var id = $(this).attr('id');
 			$(this).replaceWith("<input id='" + id + "' type='text' value='" + $(this).text() + "'>");
@@ -139,11 +154,17 @@ function makeEditable(){
 						,jsonp: '_jsonp'
 						,jsonpCallback: 'jsonpCallback'
 						,success: function(data){
-							alert(data);
-							_this.replaceWith("<p class='editable' id='" + id + "'>" + _this.val() + "</p>");
+							_this.replaceWith("<span class='editable' id='" + id + "'>" + _this.val() + "</span>");
 						}
 					});
 				}
 			});
+	});
+	$('.editable-image').bind('click', function() {
+		$("#file").trigger('click');
+	});
+	$('#file').change(function() {
+		$('form').ajaxForm({
+		}).submit();
 	});
 }
